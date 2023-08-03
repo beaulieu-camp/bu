@@ -8,7 +8,11 @@ urls = ["https://univ-rennes.libcal.com/widget/hours/today?iid=4074&systemTime=1
 ret_liste = []
 
 for url in urls :
-    data = requests.get(url).text
+    req = requests.get(url)
+    
+    if req.status_code != 200 : raise Exception("Api Univ Pété") 
+
+    data=req.text
     state = BeautifulSoup(data,features="html.parser")
 
     liste = []
